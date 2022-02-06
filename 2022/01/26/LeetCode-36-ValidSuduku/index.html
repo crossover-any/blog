@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="LeetCode-118-PascalsTriangle, tengxq">
+    <meta name="keywords" content="LeetCode-36-ValidSuduku, tengxq">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>LeetCode-118-PascalsTriangle | tengxq</title>
+    <title>LeetCode-36-ValidSuduku | tengxq</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">LeetCode-118-PascalsTriangle</h1>
+                    <h1 class="description center-align post-title">LeetCode-36-ValidSuduku</h1>
                 </div>
             </div>
         </div>
@@ -445,7 +445,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-01-28
+                    2022-01-26
                 </div>
                 
 
@@ -466,152 +466,92 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="LeetCode-118-PascalsTriangle"><a href="#LeetCode-118-PascalsTriangle" class="headerlink" title="LeetCode-118-PascalsTriangle"></a>LeetCode-118-PascalsTriangle</h1><h2 id="118杨辉三角"><a href="#118杨辉三角" class="headerlink" title="118杨辉三角"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">118杨辉三角</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个非负整数 <em><code>numRows</code>，</em>生成「杨辉三角」的前 <em><code>numRows</code></em> 行。</p>
-<p>在「杨辉三角」中，每个数是它左上方和右上方的数的和。</p>
-<p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/1626927345-DZmfxB-PascalTriangleAnimated2.gif"></p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-tex"><code class="language-tex">示例 1:
-
-输入: numRows = 5
-输出: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
-示例 2:
-
-输入: numRows = 1
-输出: [[1]]
- 
-
-提示:
-
-1 <= numRows <= 30
- 
+                <h1 id="LeetCode-36-ValidSuduku"><a href="#LeetCode-36-ValidSuduku" class="headerlink" title="LeetCode-36-ValidSuduku"></a>LeetCode-36-ValidSuduku</h1><h2 id="36有效的数独"><a href="#36有效的数独" class="headerlink" title="36有效的数独"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-sudoku/">36有效的数独</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
+<ul>
+<li>数字 1-9 在每一行只能出现一次。</li>
+<li>数字 1-9 在每一列只能出现一次。</li>
+<li>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>一个有效的数独（部分已被填充）不一定是可解的。</li>
+<li>只需要根据以上规则，验证已经填入的数字是否有效即可。<br>空白格用 ‘.’ 表示。</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/image-20220203111905926.png" alt="image-20220203111905926"></p>
+<pre class=" language-tex"><code class="language-tex">输入：board = 
+[["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+输出：true
  
 </code></pre>
-<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：根据杨辉三角特性
-     * a.周边元素都是1
-     * b.中间元素都值等于由上层紧密连接的元素和
-     * 时间复杂度：O（n）
-     * 空间复杂度：O（1）
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><pre class=" language-tex"><code class="language-tex">输入：board = 
+[["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+输出：false
+解释：除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。 但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>board.length == 9</code></li>
+<li><code>board[i].length == 9</code></li>
+<li><code>board[i][j]</code> 是一位数字（<code>1-9</code>）或者 <code>&#39;.&#39;</code></li>
+</ul>
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">     <span class="token comment" spellcheck="true">/**
+     * 思路：根据数独特点
+     *  a. 行不能重复
+     *  b. 列不能重复
+     *  c. 3x3区域不能重复（boxId = i/3 * 3 + j/3）
+     * 分别建立三个字典来记录已经扫描到到值
+     * 
+     *  时间复杂度 O（1）
+     *  空间复杂度 O（1）
      *
-     * @param numRows 杨辉三角的前numRows行
-     * @return 杨辉三角集合
+     * @param board 数组
+     * @return 是否是数独
      */</span>
-    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> <span class="token function">generate1</span><span class="token punctuation">(</span><span class="token keyword">int</span> numRows<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> rows <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>numRows<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 从左至右</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> numRows<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> row <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">int</span> val <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-                <span class="token comment" spellcheck="true">// 每行的第一个元素和最后一个元素都是 1</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token number">1</span> <span class="token operator">||</span> j <span class="token operator">==</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    val <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                    <span class="token comment" spellcheck="true">// 获取上一行数据</span>
-                    List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> preRow <span class="token operator">=</span> rows<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    val <span class="token operator">=</span> preRow<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> preRow<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isValidSudoku</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> board<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 记录行数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> row <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 记录列数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> col <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 记录块数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> box <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            row<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            col<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            box<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">char</span> c <span class="token operator">=</span> board<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">'.'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
-                row<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            rows<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> rows<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<p>可以换成适合程序员的方式（从0计数），这里判断if (j == 0 || <font color= #FF9933>j == i</font>)第一列和最后一列，会被sonar警告</p>
-<p><code>SonarLint: Remove this expression which always evaluates to &quot;false&quot;</code></p>
-<p>这里表达式是没问题的，sonar是个小傻瓜（四川话HMP）</p>
-<pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：根据杨辉三角特性
-     * a.周边元素都是1
-     * b.中间元素都值等于由上层紧密连接的元素和
-     * &lt;p>
-     * 时间复杂度：O（n）
-     * 空间复杂度：O（1）
-     *
-     * @param numRows 杨辉三角的前numRows行
-     * @return 杨辉三角集合
-     */</span>
-    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> <span class="token function">generate2</span><span class="token punctuation">(</span><span class="token keyword">int</span> numRows<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> rows <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>numRows<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 从左至右</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> numRows<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> row <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">int</span> val <span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-                <span class="token comment" spellcheck="true">// 每行的第一个元素和最后一个元素都是 1</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">||</span> j <span class="token operator">==</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    val <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                    <span class="token comment" spellcheck="true">// 获取上一行数据</span>
-                    List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> preRow <span class="token operator">=</span> rows<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    val <span class="token operator">=</span> preRow<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> preRow<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> u <span class="token operator">=</span> c <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> boxId <span class="token operator">=</span> i <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">+</span> j <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>row<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span> <span class="token operator">||</span> col<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span> <span class="token operator">||</span> box<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>boxId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span>
-                row<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                row<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                col<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                box<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>boxId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
-            rows<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> rows<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><p>题解二感觉比题解一稍微复杂但是都是O(n)的复杂度，区别是，题解一在我们要计算某个值需要的值是被计算好放在集合里面，我们直接取出来即可，例如：</p>
-<p>因为是从左至右，从上到下，我们计算第三行的值时，第二行的所有值已经被计算出来，只需要取出来求和。</p>
-<p>题解二的话从左至右，从下到上，计算值时去取上一层的两个值之和，但是这两个值有可能现在还不存在</p>
-<p>例如当前计算值 row=5, column = 1, 此时我们应需要找到 row = 4, column = 0与column=1，第四行第0列因为超出边界是返回0值，第四行第1列也不知道值是多少，需要知道第三行第一列的值…直到走到了第一行第一列，返回了1，后续的值也可以计算出来了。虽然这个比较复杂，但是优势是，如果后面有个需求是求指定行列的值，那么我们只需要把与这行列的相关数据计算出来，而不用构造全部的数据。</p>
-<pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：根据杨辉三角特性
-     * a.周边元素都是1
-     * b.中间元素都值等于由上层紧密连接的元素和
-     * &lt;p>
-     * 时间复杂度：O（n）
-     * 空间复杂度：O（1）
-     *
-     * @param numRows 杨辉三角的前numRows行
-     * @return 杨辉三角集合
-     */</span>
-    <span class="token keyword">public</span> List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> <span class="token function">generate3</span><span class="token punctuation">(</span><span class="token keyword">int</span> numRows<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> rows <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>numRows<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 从右至左</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> numRows<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token function">calRowValueFromBottomToTop</span><span class="token punctuation">(</span>rows<span class="token punctuation">,</span> numRows<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> rows<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">/**
-     * 由下至上计算指定杨辉三角行列值
-     *
-     * @param rows   杨辉三角集合
-     * @param row    杨辉三角行
-     * @param column 杨辉三角列
-     * @return 指定行列值
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">calRowValueFromBottomToTop</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span>List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> rows<span class="token punctuation">,</span> <span class="token keyword">int</span> row<span class="token punctuation">,</span> <span class="token keyword">int</span> column<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 如果超出边界返回 0，因为我们的任意值都是由两个数之和而来的</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>column <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token operator">||</span> column <span class="token operator">></span> row<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> list <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 如果当前行号大于集合大小，证明需要初始化</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>row <span class="token operator">></span> rows<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            list <span class="token operator">=</span> rows<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>row <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token comment" spellcheck="true">// 如果要取的值已经存在（比如我要取3行的2列，如果list.size = 3，证明已经存在），直接返回</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>column <span class="token operator">&lt;=</span> list<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> list<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>column <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">int</span> parentRight <span class="token operator">=</span> <span class="token function">calRowValueFromBottomToTop</span><span class="token punctuation">(</span>rows<span class="token punctuation">,</span> row <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> column <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> parentLeft <span class="token operator">=</span> <span class="token function">calRowValueFromBottomToTop</span><span class="token punctuation">(</span>rows<span class="token punctuation">,</span> row <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> column<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> value <span class="token operator">=</span> parentRight <span class="token operator">+</span> parentLeft<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 第一行数据的值左右相加等于0，这里手动赋值一下</span>
-        value <span class="token operator">=</span> value <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">?</span> <span class="token number">1</span><span class="token operator">:</span> value<span class="token punctuation">;</span>
-        list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 初始化并添加第一个数据后加入行集合</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>list<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            rows<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> value<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 </code></pre>
 
@@ -640,7 +580,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://crossover-any.github.io/2022/01/28/LeetCode-118-PascalsTriangle/">https://crossover-any.github.io/2022/01/28/LeetCode-118-PascalsTriangle/</a>
+                    <a href="https://crossover-any.github.io/2022/01/26/LeetCode-36-ValidSuduku/">https://crossover-any.github.io/2022/01/26/LeetCode-36-ValidSuduku/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -853,13 +793,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/02/03/LeetCode-73-SetMatrixZeroes/">
+                <a href="/2022/01/26/LeetCode-350-IntersectionOfTwoArraysII/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="LeetCode-73-SetMatrixZeroes">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="LeetCode-350-IntersectionOfTwoArraysII">
                         
-                        <span class="card-title">LeetCode-73-SetMatrixZeroes</span>
+                        <span class="card-title">LeetCode-350-IntersectionOfTwoArraysII</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -870,7 +810,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-26
                         </span>
                         <span class="publish-author">
                             
@@ -898,13 +838,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/27/LeetCode-121-BestTimeToBuyAndSellStock/">
+                <a href="/2022/01/25/LeetCode-88-MergeSortedArray/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="LeetCode-121-BestTimeToBuyAndSellStock">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="LeetCode-88-MergeSortedArray">
                         
-                        <span class="card-title">LeetCode-121-BestTimeToBuyAndSellStock</span>
+                        <span class="card-title">LeetCode-88-MergeSortedArray</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -915,7 +855,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-25
                             </span>
                         <span class="publish-author">
                             

@@ -1,82 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LeetCode-121-BestTimeToBuyAndSellStock</title>
-    <url>/2022/01/27/LeetCode-121-BestTimeToBuyAndSellStock/</url>
-    <content><![CDATA[<h1 id="LeetCode-121-BestTimeToBuyAndSellStock"><a href="#LeetCode-121-BestTimeToBuyAndSellStock" class="headerlink" title="LeetCode-121-BestTimeToBuyAndSellStock"></a>LeetCode-121-BestTimeToBuyAndSellStock</h1><h2 id="121买卖股票的最佳时机"><a href="#121买卖股票的最佳时机" class="headerlink" title="121买卖股票的最佳时机"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">121买卖股票的最佳时机</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。</p>
-<p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
-<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-tex"><code class="language-tex">示例 1：
-
-输入：[7,1,5,3,6,4]
-输出：5
-解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
-     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
-示例 2：
-
-输入：prices = [7,6,4,3,1]
-输出：0
-解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
- 
-
-提示：
-
-1 <= prices.length <= 105
-0 <= prices[i] <= 104
- 
- 
-</code></pre>
-<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：暴力破解，假设在第m天买（卖）股票,在n天卖（卖）收益最大
-     * 时间复杂度：O(n^2)
-     * 空间复杂度：O(1)
-     *
-     * @param prices 股价数组
-     * @return 最大收益
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxProfit1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> maxProfit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> prices<span class="token punctuation">.</span>length <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> prices<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>prices<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    maxProfit <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>maxProfit<span class="token punctuation">,</span> prices<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> maxProfit<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：将问题分割成最小单位
-     *      第一天：只能买到股票
-     *      第二天：如果当日股价比购入价高，售出可获得收益，记录收益最大值
-     *             如果当日股价比购入价低，我们应该在该日购入股票，无收益
-     *      第n天：同n-1天
-     * 时间复杂度：O(n)
-     * 空间复杂度：O(1)
-     *
-     * @param prices 股价数组
-     * @return 最大收益
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxProfit2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> maxProfit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> buyPrice <span class="token operator">=</span> prices<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> price <span class="token operator">:</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>price <span class="token operator">&lt;</span> buyPrice<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                buyPrice <span class="token operator">=</span> price<span class="token punctuation">;</span>
-            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                maxProfit <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>maxProfit<span class="token punctuation">,</span> price <span class="token operator">-</span> buyPrice<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> maxProfit<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-]]></content>
-      <tags>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode-118-PascalsTriangle</title>
     <url>/2022/01/28/LeetCode-118-PascalsTriangle/</url>
     <content><![CDATA[<h1 id="LeetCode-118-PascalsTriangle"><a href="#LeetCode-118-PascalsTriangle" class="headerlink" title="LeetCode-118-PascalsTriangle"></a>LeetCode-118-PascalsTriangle</h1><h2 id="118杨辉三角"><a href="#118杨辉三角" class="headerlink" title="118杨辉三角"></a><a href="https://leetcode-cn.com/problems/maximum-subarray/">118杨辉三角</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个非负整数 <em><code>numRows</code>，</em>生成「杨辉三角」的前 <em><code>numRows</code></em> 行。</p>
@@ -233,91 +157,6 @@
       </tags>
   </entry>
   <entry>
-    <title>leetcode-217-containsDuplicate</title>
-    <url>/2022/01/21/LeetCode-217-ContainsDuplicate/</url>
-    <content><![CDATA[<h1 id="LeetCode-217-ContainsDuplicate"><a href="#LeetCode-217-ContainsDuplicate" class="headerlink" title="LeetCode-217-ContainsDuplicate"></a>LeetCode-217-ContainsDuplicate</h1><h2 id="217存在重复元素"><a href="#217存在重复元素" class="headerlink" title="217存在重复元素"></a><a href="https://leetcode-cn.com/problems/contains-duplicate/">217存在重复元素</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-tex"><code class="language-tex">示例 1：
-
-输入：nums = [1,2,3,1]
-输出：true
-示例 2：
-
-输入：nums = [1,2,3,4]
-输出：false
-示例 3：
-
-输入：nums = [1,1,1,3,3,4,3,2,4,2]
-输出：true
-
-
-提示：
-
-1 <= nums.length <= 105
--109 <= nums[i] <= 109
-</code></pre>
-<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">
-    <span class="token comment" spellcheck="true">/**
-     * 思路：
-     *      根据set.add的特性
-     *      如果集合没有该值添加成功并返回false
-     *      如果集合已存在该值返回false
-     * @param nums 数组
-     * @return 是否存在重复元素
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">containsDuplicate1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>nums <span class="token operator">==</span> null <span class="token operator">||</span> nums<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        Set<span class="token operator">&lt;</span>Integer<span class="token operator">></span> dic <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>nums<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> num <span class="token operator">:</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dic<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：
-     *      1. 先快排对数组进行排序
-     *      2. 如果紧邻两个元素相等，则包含重复元素
-     *      时间复杂度O(NlogN), 空间复杂度(logN)
-     * @param nums 数组
-     * @return 是否存在重复元素
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">containsDuplicate2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>nums <span class="token operator">==</span> null <span class="token operator">||</span> nums<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        Arrays<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> nums<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<h2 id="题解三："><a href="#题解三：" class="headerlink" title="题解三："></a>题解三：</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
- * 思路：
- * 利用Java的Stream流工具，但是效率低，不建议
- *
- * @param nums 数组
- * @return 是否存在重复元素
- */</span>
-<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">containsDuplicate3</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>nums <span class="token operator">==</span> null <span class="token operator">||</span> nums<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> IntStream<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">distinct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-]]></content>
-      <tags>
-        <tag>leetcode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LeetCode-1-TwoSum</title>
     <url>/2022/01/25/LeetCode-1-TwoSum/</url>
     <content><![CDATA[<h1 id="LeetCode-1-TwoSum"><a href="#LeetCode-1-TwoSum" class="headerlink" title="LeetCode-1-TwoSum"></a>LeetCode-1-TwoSum</h1><h2 id="1两数之和"><a href="#1两数之和" class="headerlink" title="1两数之和"></a><a href="https://leetcode-cn.com/problems/two-sum/">1两数之和</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
@@ -394,28 +233,32 @@
       </tags>
   </entry>
   <entry>
-    <title>LeetCode-516-ReshapeTheMatrix</title>
-    <url>/2022/01/27/LeetCode-516-ReshapeTheMatrix/</url>
-    <content><![CDATA[<h1 id="LeetCode-516-ReshapeTheMatrix"><a href="#LeetCode-516-ReshapeTheMatrix" class="headerlink" title="LeetCode-516-ReshapeTheMatrix"></a>LeetCode-516-ReshapeTheMatrix</h1><h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><h3 id="516重塑矩阵"><a href="#516重塑矩阵" class="headerlink" title="516重塑矩阵"></a><a href="https://leetcode-cn.com/problems/reshape-the-matrix/">516重塑矩阵</a></h3><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在 MATLAB 中，有一个非常有用的函数 reshape ，它可以将一个 m x n 矩阵重塑为另一个大小不同（r x c）的新矩阵，但保留其原始数据。</p>
-<p>给你一个由二维数组 mat 表示的 m x n 矩阵，以及两个正整数 r 和 c ，分别表示想要的重构的矩阵的行数和列数。</p>
-<p>重构后的矩阵需要将原始矩阵的所有元素以相同的 行遍历顺序 填充。</p>
-<p>如果具有给定参数的 reshape 操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/20220127170248.png"></p>
-<pre class=" language-tex"><code class="language-tex">输入：mat = [[1,2],[3,4]], r = 1, c = 4
-输出：[[1,2,3,4]]
-</code></pre>
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/20220127170631.png"></p>
-<pre class=" language-tex"><code class="language-tex">输入：mat = [[1,2],[3,4]], r = 2, c = 4
-输出：[[1,2],[3,4]]
+    <title>LeetCode-121-BestTimeToBuyAndSellStock</title>
+    <url>/2022/01/27/LeetCode-121-BestTimeToBuyAndSellStock/</url>
+    <content><![CDATA[<h1 id="LeetCode-121-BestTimeToBuyAndSellStock"><a href="#LeetCode-121-BestTimeToBuyAndSellStock" class="headerlink" title="LeetCode-121-BestTimeToBuyAndSellStock"></a>LeetCode-121-BestTimeToBuyAndSellStock</h1><h2 id="121买卖股票的最佳时机"><a href="#121买卖股票的最佳时机" class="headerlink" title="121买卖股票的最佳时机"></a><a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">121买卖股票的最佳时机</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。</p>
+<p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-tex"><code class="language-tex">示例 1：
+
+输入：[7,1,5,3,6,4]
+输出：5
+解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+示例 2：
+
+输入：prices = [7,6,4,3,1]
+输出：0
+解释：在这种情况下, 没有交易完成, 所以最大利润为 0。
+ 
 
 提示：
-m == mat.length
-n == mat[i].length
-1 <= m, n <= 100
--1000 <= mat[i][j] <= 1000
-1 <= r, c <= 300
+
+1 <= prices.length <= 105
+0 <= prices[i] <= 104
+ 
+ 
 </code></pre>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h3><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
      * 思路：暴力破解，假设在第m天买（卖）股票,在n天卖（卖）收益最大
      * 时间复杂度：O(n^2)
      * 空间复杂度：O(1)
@@ -435,7 +278,7 @@ n == mat[i].length
         <span class="token keyword">return</span> maxProfit<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 </code></pre>
-<h3 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h3><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
      * 思路：将问题分割成最小单位
      *      第一天：只能买到股票
      *      第二天：如果当日股价比购入价高，售出可获得收益，记录收益最大值
@@ -737,6 +580,413 @@ n == mat[i].length
       </tags>
   </entry>
   <entry>
+    <title>leetcode-217-containsDuplicate</title>
+    <url>/2022/01/21/LeetCode-217-ContainsDuplicate/</url>
+    <content><![CDATA[<h1 id="LeetCode-217-ContainsDuplicate"><a href="#LeetCode-217-ContainsDuplicate" class="headerlink" title="LeetCode-217-ContainsDuplicate"></a>LeetCode-217-ContainsDuplicate</h1><h2 id="217存在重复元素"><a href="#217存在重复元素" class="headerlink" title="217存在重复元素"></a><a href="https://leetcode-cn.com/problems/contains-duplicate/">217存在重复元素</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> 。如果任一值在数组中出现 <strong>至少两次</strong> ，返回 <code>true</code> ；如果数组中每个元素互不相同，返回 <code>false</code> 。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-tex"><code class="language-tex">示例 1：
+
+输入：nums = [1,2,3,1]
+输出：true
+示例 2：
+
+输入：nums = [1,2,3,4]
+输出：false
+示例 3：
+
+输入：nums = [1,1,1,3,3,4,3,2,4,2]
+输出：true
+
+
+提示：
+
+1 <= nums.length <= 105
+-109 <= nums[i] <= 109
+</code></pre>
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">
+    <span class="token comment" spellcheck="true">/**
+     * 思路：
+     *      根据set.add的特性
+     *      如果集合没有该值添加成功并返回false
+     *      如果集合已存在该值返回false
+     * @param nums 数组
+     * @return 是否存在重复元素
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">containsDuplicate1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nums <span class="token operator">==</span> null <span class="token operator">||</span> nums<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        Set<span class="token operator">&lt;</span>Integer<span class="token operator">></span> dic <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>nums<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> num <span class="token operator">:</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>dic<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：
+     *      1. 先快排对数组进行排序
+     *      2. 如果紧邻两个元素相等，则包含重复元素
+     *      时间复杂度O(NlogN), 空间复杂度(logN)
+     * @param nums 数组
+     * @return 是否存在重复元素
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">containsDuplicate2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>nums <span class="token operator">==</span> null <span class="token operator">||</span> nums<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        Arrays<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> nums<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="题解三："><a href="#题解三：" class="headerlink" title="题解三："></a>题解三：</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
+ * 思路：
+ * 利用Java的Stream流工具，但是效率低，不建议
+ *
+ * @param nums 数组
+ * @return 是否存在重复元素
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">containsDuplicate3</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>nums <span class="token operator">==</span> null <span class="token operator">||</span> nums<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> IntStream<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">distinct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-516-ReshapeTheMatrix</title>
+    <url>/2022/01/27/LeetCode-516-ReshapeTheMatrix/</url>
+    <content><![CDATA[<h1 id="LeetCode-516-ReshapeTheMatrix"><a href="#LeetCode-516-ReshapeTheMatrix" class="headerlink" title="LeetCode-516-ReshapeTheMatrix"></a>LeetCode-516-ReshapeTheMatrix</h1><h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><h3 id="516重塑矩阵"><a href="#516重塑矩阵" class="headerlink" title="516重塑矩阵"></a><a href="https://leetcode-cn.com/problems/reshape-the-matrix/">516重塑矩阵</a></h3><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在 MATLAB 中，有一个非常有用的函数 reshape ，它可以将一个 m x n 矩阵重塑为另一个大小不同（r x c）的新矩阵，但保留其原始数据。</p>
+<p>给你一个由二维数组 mat 表示的 m x n 矩阵，以及两个正整数 r 和 c ，分别表示想要的重构的矩阵的行数和列数。</p>
+<p>重构后的矩阵需要将原始矩阵的所有元素以相同的 行遍历顺序 填充。</p>
+<p>如果具有给定参数的 reshape 操作是可行且合理的，则输出新的重塑矩阵；否则，输出原始矩阵。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/20220127170248.png"></p>
+<pre class=" language-tex"><code class="language-tex">输入：mat = [[1,2],[3,4]], r = 1, c = 4
+输出：[[1,2,3,4]]
+</code></pre>
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/20220127170631.png"></p>
+<pre class=" language-tex"><code class="language-tex">输入：mat = [[1,2],[3,4]], r = 2, c = 4
+输出：[[1,2],[3,4]]
+
+提示：
+m == mat.length
+n == mat[i].length
+1 <= m, n <= 100
+-1000 <= mat[i][j] <= 1000
+1 <= r, c <= 300
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h3><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：暴力破解，假设在第m天买（卖）股票,在n天卖（卖）收益最大
+     * 时间复杂度：O(n^2)
+     * 空间复杂度：O(1)
+     *
+     * @param prices 股价数组
+     * @return 最大收益
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxProfit1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> maxProfit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> prices<span class="token punctuation">.</span>length <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> prices<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>prices<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    maxProfit <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>maxProfit<span class="token punctuation">,</span> prices<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">-</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> maxProfit<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h3 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h3><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：将问题分割成最小单位
+     *      第一天：只能买到股票
+     *      第二天：如果当日股价比购入价高，售出可获得收益，记录收益最大值
+     *             如果当日股价比购入价低，我们应该在该日购入股票，无收益
+     *      第n天：同n-1天
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     *
+     * @param prices 股价数组
+     * @return 最大收益
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxProfit2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> maxProfit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> buyPrice <span class="token operator">=</span> prices<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> price <span class="token operator">:</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>price <span class="token operator">&lt;</span> buyPrice<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                buyPrice <span class="token operator">=</span> price<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                maxProfit <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>maxProfit<span class="token punctuation">,</span> price <span class="token operator">-</span> buyPrice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> maxProfit<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-53-MaximumSubarry</title>
+    <url>/2022/01/27/LeetCode-53-MaximumSubarry/</url>
+    <content><![CDATA[<h1 id="LeetCode-53-MaximumSubarry"><a href="#LeetCode-53-MaximumSubarry" class="headerlink" title="LeetCode-53-MaximumSubarry"></a>LeetCode-53-MaximumSubarry</h1><h2 id="53最大子数组和"><a href="#53最大子数组和" class="headerlink" title="53最大子数组和"></a><a href="https://leetcode-cn.com/problems/maximum-subarray/">53最大子数组和</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-tex"><code class="language-tex">示例 1：
+
+输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
+输出：6
+解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
+示例 2：
+
+输入：nums = [1]
+输出：1
+示例 3：
+
+输入：nums = [5,4,-1,7,8]
+输出：23
+ 
+
+提示：
+
+1 <= nums.length <= 105
+-104 <= nums[i] <= 104
+ 
+ 
+</code></pre>
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：假设最大子数组和是从第i个位置开始，我们只需要遍历每个以i位置开始的连续元素的最大和
+     *
+     * 时间复杂度：O(n^2)
+     * 空间复杂度：O(1)
+     *
+     * @param nums 数组
+     * @return 最大子数组和
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxSubArray1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> maxSub <span class="token operator">=</span> Integer<span class="token punctuation">.</span>MIN_VALUE<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                max <span class="token operator">+=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>maxSub <span class="token operator">&lt;</span> max<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    maxSub <span class="token operator">=</span> max<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> maxSub<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：同样的将问题分割最小
+     *       假设只有一个数，那么我们的最大子数组和就是第一个数（maxSub=nums[0]）
+     *       如果有第二个数，我们将第一个数加上第二个数的和与第一个数进行比较
+     *       如果比第一个数的和要大，那么我们可以将第二个数收入囊中
+     *           反之说明第一个数是目前为止找到最大的子数组，但是我们还得继续找下去
+     *           将目前最大值记录下来，设置最大和为第二个元素以第二个元素为起点继续查找
+     *
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     *
+     * @param nums 数组
+     * @return 最大子数组和
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxSubArray2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> maxSub <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> pres <span class="token operator">=</span> maxSub<span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> next <span class="token operator">=</span> pres <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            pres <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> next<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>pres <span class="token operator">></span> maxSub<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                maxSub <span class="token operator">=</span> pres<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> maxSub<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-36-ValidSuduku</title>
+    <url>/2022/01/26/LeetCode-36-ValidSuduku/</url>
+    <content><![CDATA[<h1 id="LeetCode-36-ValidSuduku"><a href="#LeetCode-36-ValidSuduku" class="headerlink" title="LeetCode-36-ValidSuduku"></a>LeetCode-36-ValidSuduku</h1><h2 id="36有效的数独"><a href="#36有效的数独" class="headerlink" title="36有效的数独"></a><a href="https://leetcode-cn.com/problems/valid-sudoku/">36有效的数独</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
+<ul>
+<li>数字 1-9 在每一行只能出现一次。</li>
+<li>数字 1-9 在每一列只能出现一次。</li>
+<li>数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>一个有效的数独（部分已被填充）不一定是可解的。</li>
+<li>只需要根据以上规则，验证已经填入的数字是否有效即可。<br>空白格用 ‘.’ 表示。</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/image-20220203111905926.png" alt="image-20220203111905926"></p>
+<pre class=" language-tex"><code class="language-tex">输入：board = 
+[["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+输出：true
+ 
+</code></pre>
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><pre class=" language-tex"><code class="language-tex">输入：board = 
+[["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]]
+输出：false
+解释：除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。 但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>board.length == 9</code></li>
+<li><code>board[i].length == 9</code></li>
+<li><code>board[i][j]</code> 是一位数字（<code>1-9</code>）或者 <code>&#39;.&#39;</code></li>
+</ul>
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">     <span class="token comment" spellcheck="true">/**
+     * 思路：根据数独特点
+     *  a. 行不能重复
+     *  b. 列不能重复
+     *  c. 3x3区域不能重复（boxId = i/3 * 3 + j/3）
+     * 分别建立三个字典来记录已经扫描到到值
+     * 
+     *  时间复杂度 O（1）
+     *  空间复杂度 O（1）
+     *
+     * @param board 数组
+     * @return 是否是数独
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isValidSudoku</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> board<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 记录行数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> row <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 记录列数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> col <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 记录块数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> box <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            row<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            col<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            box<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">char</span> c <span class="token operator">=</span> board<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">'.'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">int</span> u <span class="token operator">=</span> c <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> boxId <span class="token operator">=</span> i <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">+</span> j <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>row<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span> <span class="token operator">||</span> col<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span> <span class="token operator">||</span> box<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>boxId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                row<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                col<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                box<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>boxId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode-73-SetMatrixZeroes</title>
+    <url>/2022/02/03/LeetCode-73-SetMatrixZeroes/</url>
+    <content><![CDATA[<h1 id="LeetCode-73-SetMatrixZeroes"><a href="#LeetCode-73-SetMatrixZeroes" class="headerlink" title="LeetCode-73-SetMatrixZeroes"></a>LeetCode-73-SetMatrixZeroes</h1><h2 id="73矩阵置零"><a href="#73矩阵置零" class="headerlink" title="73矩阵置零"></a><a href="https://leetcode-cn.com/problems/set-matrix-zeroes/">73矩阵置零</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><ul>
+<li>给定一个 <code>*m* x *n*</code> 的矩阵，如果一个元素为 <strong>0</strong> ，则将其所在行和列的所有元素都设为 <strong>0</strong> 。请使用 <strong><a href="http://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a></strong> 算法<strong>。</strong></li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/image-20220203115105516.png" alt="image-20220203115105516"></p>
+<pre class=" language-tex"><code class="language-tex">输入：matrix = [[1,1,1],[1,0,1],[1,1,1]]
+输出：[[1,0,1],[0,0,0],[1,0,1]]
+ 
+</code></pre>
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><p><img src="https://tengxq-blog.oss-cn-beijing.aliyuncs.com/blog/image-20220203115030741.png" alt="image-20220203115030741"></p>
+<pre class=" language-tex"><code class="language-tex">输入：matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+输出：[[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li>m == matrix.length</li>
+<li>n == matrix[0].length</li>
+<li>1 &lt;= m, n &lt;= 200</li>
+<li>-231 &lt;= matrix[i][j] &lt;= 231 - 1</li>
+</ul>
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">     <span class="token comment" spellcheck="true">/**
+     * 思路：根据数独特点
+     *  a. 行不能重复
+     *  b. 列不能重复
+     *  c. 3x3区域不能重复（boxId = i/3 * 3 + j/3）
+     * 分别建立三个字典来记录已经扫描到到值
+     * 
+     *  时间复杂度 O（1）
+     *  空间复杂度 O（1）
+     *
+     * @param board 数组
+     * @return 是否是数独
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isValidSudoku</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> board<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 记录行数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> row <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 记录列数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> col <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 记录块数字</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> Set<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> box <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            row<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            col<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            box<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">9</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">char</span> c <span class="token operator">=</span> board<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">'.'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">int</span> u <span class="token operator">=</span> c <span class="token operator">-</span> <span class="token string">'0'</span><span class="token punctuation">;</span>
+                <span class="token keyword">int</span> boxId <span class="token operator">=</span> i <span class="token operator">/</span> <span class="token number">3</span> <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">+</span> j <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>row<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span> <span class="token operator">||</span> col<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span> <span class="token operator">||</span> box<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>boxId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                row<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                col<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                box<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>boxId<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>LeetCode-88-MergeSortedArray</title>
     <url>/2022/01/25/LeetCode-88-MergeSortedArray/</url>
     <content><![CDATA[<h1 id="LeetCode-88-MergeSortedArray"><a href="#LeetCode-88-MergeSortedArray" class="headerlink" title="LeetCode-88-MergeSortedArray"></a>LeetCode-88-MergeSortedArray</h1><h2 id="88合并两个有序数组"><a href="#88合并两个有序数组" class="headerlink" title="88合并两个有序数组"></a><a href="https://leetcode-cn.com/problems/merge-sorted-array/">88合并两个有序数组</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。</p>
@@ -860,86 +1110,11 @@ nums2.length == n
       </tags>
   </entry>
   <entry>
-    <title>LeetCode-53-MaximumSubarry</title>
-    <url>/2022/01/27/LeetCode-53-MaximumSubarry/</url>
-    <content><![CDATA[<h1 id="LeetCode-53-MaximumSubarry"><a href="#LeetCode-53-MaximumSubarry" class="headerlink" title="LeetCode-53-MaximumSubarry"></a>LeetCode-53-MaximumSubarry</h1><h2 id="53最大子数组和"><a href="#53最大子数组和" class="headerlink" title="53最大子数组和"></a><a href="https://leetcode-cn.com/problems/maximum-subarray/">53最大子数组和</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
-<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre class=" language-tex"><code class="language-tex">示例 1：
-
-输入：nums = [-2,1,-3,4,-1,2,1,-5,4]
-输出：6
-解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。
-示例 2：
-
-输入：nums = [1]
-输出：1
-示例 3：
-
-输入：nums = [5,4,-1,7,8]
-输出：23
- 
-
-提示：
-
-1 <= nums.length <= 105
--104 <= nums[i] <= 104
- 
- 
-</code></pre>
-<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：假设最大子数组和是从第i个位置开始，我们只需要遍历每个以i位置开始的连续元素的最大和
-     *
-     * 时间复杂度：O(n^2)
-     * 空间复杂度：O(1)
-     *
-     * @param nums 数组
-     * @return 最大子数组和
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxSubArray1</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> maxSub <span class="token operator">=</span> Integer<span class="token punctuation">.</span>MIN_VALUE<span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                max <span class="token operator">+=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>maxSub <span class="token operator">&lt;</span> max<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    maxSub <span class="token operator">=</span> max<span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> maxSub<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：同样的将问题分割最小
-     *       假设只有一个数，那么我们的最大子数组和就是第一个数（maxSub=nums[0]）
-     *       如果有第二个数，我们将第一个数加上第二个数的和与第一个数进行比较
-     *       如果比第一个数的和要大，那么我们可以将第二个数收入囊中
-     *           反之说明第一个数是目前为止找到最大的子数组，但是我们还得继续找下去
-     *           将目前最大值记录下来，设置最大和为第二个元素以第二个元素为起点继续查找
-     *
-     * 时间复杂度：O(n)
-     * 空间复杂度：O(1)
-     *
-     * @param nums 数组
-     * @return 最大子数组和
-     */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxSubArray2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> maxSub <span class="token operator">=</span> nums<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> pres <span class="token operator">=</span> maxSub<span class="token punctuation">;</span>
-
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">int</span> next <span class="token operator">=</span> pres <span class="token operator">+</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-            pres <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> next<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>pres <span class="token operator">></span> maxSub<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                maxSub <span class="token operator">=</span> pres<span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> maxSub<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-]]></content>
+    <title>this is my first hexo blog</title>
+    <url>/2022/01/01/this-is-my-first-hexo-blog/</url>
+    <content><![CDATA[]]></content>
       <tags>
-        <tag>leetcode</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -966,14 +1141,6 @@ nums2.length == n
 ]]></content>
       <tags>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>this is my first hexo blog</title>
-    <url>/2022/01/01/this-is-my-first-hexo-blog/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
 </search>
