@@ -821,7 +821,7 @@ n == mat[i].length
   </entry>
   <entry>
     <title>LeetCode-36-ValidSuduku</title>
-    <url>/2022/01/26/LeetCode-36-ValidSuduku/</url>
+    <url>/2022/02/04/LeetCode-36-ValidSuduku/</url>
     <content><![CDATA[<h1 id="LeetCode-36-ValidSuduku"><a href="#LeetCode-36-ValidSuduku" class="headerlink" title="LeetCode-36-ValidSuduku"></a>LeetCode-36-ValidSuduku</h1><h2 id="36有效的数独"><a href="#36有效的数独" class="headerlink" title="36有效的数独"></a><a href="https://leetcode-cn.com/problems/valid-sudoku/">36有效的数独</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。</p>
 <ul>
 <li>数字 1-9 在每一行只能出现一次。</li>
