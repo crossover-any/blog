@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="续侄溥赏酴醾劝酒二首, tengxq">
+    <meta name="keywords" content="LeetCode-509-FibonacciNumber, tengxq">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>续侄溥赏酴醾劝酒二首 | tengxq</title>
+    <title>LeetCode-509-FibonacciNumber | tengxq</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">续侄溥赏酴醾劝酒二首</h1>
+                    <h1 class="description center-align post-title">LeetCode-509-FibonacciNumber</h1>
                 </div>
             </div>
         </div>
@@ -429,8 +429,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%AF%97%E8%AF%8D/">
-                                <span class="chip bg-color">诗词</span>
+                            <a href="/tags/leetcode/">
+                                <span class="chip bg-color">leetcode</span>
                             </a>
                         
                     </div>
@@ -445,7 +445,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-06
+                    2022-02-10
                 </div>
                 
 
@@ -466,12 +466,72 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <center><h1>续侄溥赏酴醾劝酒二首-陈著</h1></center>
-
-<center>
-  <h4>花有重开日，人无再少年。</h4>
-  <h4>相逢拌酩酊，何必备芳鲜。</h4>
-</center>
+                <h1 id="LeetCode-509-FibonacciNumber"><a href="#LeetCode-509-FibonacciNumber" class="headerlink" title="LeetCode-509-FibonacciNumber"></a>LeetCode-509-FibonacciNumber</h1><h2 id="509斐波那契数列"><a href="#509斐波那契数列" class="headerlink" title="509斐波那契数列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fibonacci-number/">509斐波那契数列</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><strong>斐波那契数</strong> （通常用 <code>F(n)</code> 表示）形成的序列称为 <strong>斐波那契数列</strong> 。该数列由 <code>0</code> 和 <code>1</code> 开始，后面的每一项数字都是前面两项数字的和。也就是：</p>
+<pre><code>F(0) = 0，F(1) = 1
+F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1
+</code></pre>
+<p>给定 <code>n</code> ，请计算 <code>F(n)</code> 。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><pre class=" language-tex"><code class="language-tex">输入：n = 2
+输出：1
+解释：F(2) = F(1) + F(0) = 1 + 0 = 1
+ 
+</code></pre>
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><pre class=" language-tex"><code class="language-tex">输入：n = 3
+输出：2
+解释：F(3) = F(2) + F(1) = 1 + 1 = 2
+</code></pre>
+<h3 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h3><pre><code>输入：n = 4
+输出：3
+解释：F(4) = F(3) + F(2) = 2 + 1 = 3
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= n &lt;= 30</code></li>
+</ul>
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：斐波那契数列是递归对经典例子，每个数都要由前面的数求和
+     *      而前面的数也要由更往前的数的求和而得到。直到n=1或0。
+     *      这比较像我们数学中的复合函数，f(f(1))这种
+     *
+     * 时间复杂度：O（n^2）
+     * 空间复杂度：O（1）
+     * @param n 第n个数
+     * @return 第n个数的前两数之和
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">fib1</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token function">fib1</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">fib1</span><span class="token punctuation">(</span>n <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：方法1存在重复计算的问题，例如 计算f(10)=f(9) + f(8);
+     *      f(9) = f(8) + f(7), 这里f(8)需要计算两次。存在重复
+     *      计算的问题，如果我们将f(8)第一次计算的值存储起来，下一次
+     *      需要f(8)的时候我们先看这个值有没有计算过，如果计算过我们
+     *      直接取出来即可，防止不必要的资源消耗。
+     *
+     * 时间复杂度：O（n）
+     * 空间复杂度：O（n）
+     * @param n 第n个数
+     * @return 第n个数的前两数之和
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">fib2</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 多申请1个空间，因为dp[n]应该为n+1下标才不会越界</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 在java中int初始数据都为0，只需要设置dp[1]即可</span>
+        dp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// f(n) = f(n-1) + f(n-2)</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
 
                 
             </div>
@@ -498,7 +558,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://crossover-any.github.io/2022/02/06/%E7%BB%AD%E4%BE%84%E6%BA%A5%E8%B5%8F%E9%85%B4%E9%86%BE%E5%8A%9D%E9%85%92%E4%BA%8C%E9%A6%96/">https://crossover-any.github.io/2022/02/06/%E7%BB%AD%E4%BE%84%E6%BA%A5%E8%B5%8F%E9%85%B4%E9%86%BE%E5%8A%9D%E9%85%92%E4%BA%8C%E9%A6%96/</a>
+                    <a href="https://crossover-any.github.io/2022/02/10/LeetCode-509-FibonacciNumber/">https://crossover-any.github.io/2022/02/10/LeetCode-509-FibonacciNumber/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -536,8 +596,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%AF%97%E8%AF%8D/">
-                                    <span class="chip bg-color">诗词</span>
+                                <a href="/tags/leetcode/">
+                                    <span class="chip bg-color">leetcode</span>
                                 </a>
                             
                         </div>
@@ -707,9 +767,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/02/10/LeetCode-509-FibonacciNumber/">
                     <div class="card-image">
@@ -727,9 +788,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -738,6 +799,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -756,13 +818,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/04/LeetCode-36-ValidSuduku/">
+                <a href="/2022/02/06/%E7%BB%AD%E4%BE%84%E6%BA%A5%E8%B5%8F%E9%85%B4%E9%86%BE%E5%8A%9D%E9%85%92%E4%BA%8C%E9%A6%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="LeetCode-36-ValidSuduku">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="续侄溥赏酴醾劝酒二首">
                         
-                        <span class="card-title">LeetCode-36-ValidSuduku</span>
+                        <span class="card-title">续侄溥赏酴醾劝酒二首</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -773,7 +835,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-06
                             </span>
                         <span class="publish-author">
                             
@@ -786,8 +848,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/leetcode/">
-                        <span class="chip bg-color">leetcode</span>
+                    <a href="/tags/%E8%AF%97%E8%AF%8D/">
+                        <span class="chip bg-color">诗词</span>
                     </a>
                     
                 </div>
