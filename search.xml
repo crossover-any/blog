@@ -1231,4 +1231,75 @@ F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1
         <tag>leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LeetCode-1137-NthTaibonacciNumber</title>
+    <url>/2022/02/12/LeetCode-1137-NthTaibonacciNumber/</url>
+    <content><![CDATA[<h1 id="LeetCode-1137-NthTaibonacciNumber"><a href="#LeetCode-1137-NthTaibonacciNumber" class="headerlink" title="LeetCode-1137-NthTaibonacciNumber"></a>LeetCode-1137-NthTaibonacciNumber</h1><h2 id="1137第n个泰波那契数列"><a href="#1137第n个泰波那契数列" class="headerlink" title="1137第n个泰波那契数列"></a><a href="https://leetcode-cn.com/problems/n-th-tribonacci-number/">1137第n个泰波那契数列</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>泰波那契序列 Tn 定义如下： </p>
+<p>T0 = 0, T1 = 1, T2 = 1, 且在 n &gt;= 0 的条件下 Tn+3 = Tn + Tn+1 + Tn+2</p>
+<p>给你整数 n，请返回第 n 个泰波那契数 Tn 的值。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><pre class=" language-tex"><code class="language-tex">输入：n = 4
+输出：4
+解释：
+T_3 = 0 + 1 + 1 = 2
+T_4 = 1 + 1 + 2 = 4
+ 
+</code></pre>
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><pre class=" language-tex"><code class="language-tex">输入：n = 25
+输出：1389537
+</code></pre>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= n &lt;= 37</code></li>
+<li>答案保证是一个 32 位整数，即 <code>answer &lt;= 2^31 - 1</code>。</li>
+</ul>
+<h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：这道题和斐波那契数列{@link order._509.FibonacciNumberSolution}
+     * 区别是第n个数等于前三个之和,斐波那契数列是两个。
+     * &lt;p>
+     * 时间复杂度：O（n^3）
+     * 空间复杂度：O（1）
+     *
+     * @param n 第n个泰波那契数列
+     * @return 第n个泰波那契数列值
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：上面方法1的时间复杂度过高，对比斐波那契数列分析得知是重复计算的原因
+     * 需要使用打表的方式减少不必要的计算
+     * &lt;p>
+     * 时间复杂度：O（n）
+     * 空间复杂度：O（n）
+     *
+     * @param n 第n个泰波那契数列
+     * @return 第n个泰波那契数列值
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">tribonacci2</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        dp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+]]></content>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
 </search>
