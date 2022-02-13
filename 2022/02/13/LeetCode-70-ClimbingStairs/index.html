@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="LeetCode-1137-NthTaibonacciNumber, tengxq">
+    <meta name="keywords" content="LeetCode-70-ClimbingStairs, tengxq">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>LeetCode-1137-NthTaibonacciNumber | tengxq</title>
+    <title>LeetCode-70-ClimbingStairs | tengxq</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">LeetCode-1137-NthTaibonacciNumber</h1>
+                    <h1 class="description center-align post-title">LeetCode-70-ClimbingStairs</h1>
                 </div>
             </div>
         </div>
@@ -445,7 +445,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-12
+                    2022-02-13
                 </div>
                 
 
@@ -466,67 +466,116 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="LeetCode-1137-NthTaibonacciNumber"><a href="#LeetCode-1137-NthTaibonacciNumber" class="headerlink" title="LeetCode-1137-NthTaibonacciNumber"></a>LeetCode-1137-NthTaibonacciNumber</h1><h2 id="1137第n个泰波那契数列"><a href="#1137第n个泰波那契数列" class="headerlink" title="1137第n个泰波那契数列"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-th-tribonacci-number/">1137第n个泰波那契数列</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>泰波那契序列 Tn 定义如下： </p>
-<p>T0 = 0, T1 = 1, T2 = 1, 且在 n &gt;= 0 的条件下 Tn+3 = Tn + Tn+1 + Tn+2</p>
-<p>给你整数 n，请返回第 n 个泰波那契数 Tn 的值。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><pre class=" language-tex"><code class="language-tex">输入：n = 4
-输出：4
-解释：
-T_3 = 0 + 1 + 1 = 2
-T_4 = 1 + 1 + 2 = 4
+                <h1 id="LeetCode-70-ClimbingStairs"><a href="#LeetCode-70-ClimbingStairs" class="headerlink" title="LeetCode-70-ClimbingStairs"></a>LeetCode-70-ClimbingStairs</h1><h2 id="70爬梯子"><a href="#70爬梯子" class="headerlink" title="70爬梯子"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">70爬梯子</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
+<p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><pre class=" language-tex"><code class="language-tex">输入：n = 2
+输出：2
+解释：有两种方法可以爬到楼顶。
+1. 1 阶 + 1 阶
+2. 2 阶
  
 </code></pre>
-<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><pre class=" language-tex"><code class="language-tex">输入：n = 25
-输出：1389537
+<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><pre class=" language-tex"><code class="language-tex">输入：n = 3
+输出：3
+解释：有三种方法可以爬到楼顶。
+1. 1 阶 + 1 阶 + 1 阶
+2. 1 阶 + 2 阶
+3. 2 阶 + 1 阶
 </code></pre>
 <p><strong>提示：</strong></p>
 <ul>
-<li><code>0 &lt;= n &lt;= 37</code></li>
-<li>答案保证是一个 32 位整数，即 <code>answer &lt;= 2^31 - 1</code>。</li>
+<li><code>1 &lt;= n &lt;= 45</code></li>
 </ul>
 <h2 id="题解一："><a href="#题解一：" class="headerlink" title="题解一："></a>题解一：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：这道题和斐波那契数列{@link order._509.FibonacciNumberSolution}
-     * 区别是第n个数等于前三个之和,斐波那契数列是两个。
+     * 思路：
+     *      假设只有1阶梯，那么只有一种方式
+     *      假设有2阶梯，那么可以选择（1，1）与（2）两种方式
+     *      假设有3阶梯，我们可以从第二阶梯跨1步来到3阶梯，或者从1阶梯跨2步来到3阶梯
+     *      那到3阶梯的方式就有 到1阶梯到方式再加上到2阶梯到方式
      * &lt;p>
-     * 时间复杂度：O（n^3）
-     * 空间复杂度：O（1）
+     *      ...
+     *      假设有n阶梯，我们从n-1阶梯跨1步，或者从n-2阶梯跨2步 f(n) = f(n - 1) + f(n -2)
+     * &lt;p>
+     * 时间复杂度：O（n^2）
+     * 空间复杂度：O（n）
      *
-     * @param n 第n个泰波那契数列
-     * @return 第n个泰波那契数列值
+     * @param n 阶梯数量
+     * @return 不同方法
      */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">climbStairs</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> n<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">tribonacci</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">climbStairs</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token function">climbStairs</span><span class="token punctuation">(</span>n <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 </code></pre>
 <h2 id="题解二："><a href="#题解二：" class="headerlink" title="题解二："></a>题解二：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
-     * 思路：上面方法1的时间复杂度过高，对比斐波那契数列分析得知是重复计算的原因
-     * 需要使用打表的方式减少不必要的计算
+     * 思路：方法1的缺点是存在重复计算的问题，这是递归中常见的问题
+     *      一般递归都会转化成动态规划来减少时间复杂度。
+     *      示例：求到达5阶梯有多少种不同的方式
+     *      根据方法1来模拟过程。
+     *      f(5) = f(4) + f(3)
+     *      计算f(4)
+     *      f(4) = f(3) + f(2)
+     *      f(3) = f(2) + f(1)
+     *      f(2) = 2
+     *      f(1) = 1
+     *      计算f(3)
+     *      f(3) = f(2) + f(1)
+     *      f(2) = 2
+     *      f(1) = 1
+     *      通过模拟计算我们可以观察到在计算到达4阶梯到不同方式中就已经包含来计算到
+     *      3阶梯到不同方式，但是f(5) = f(4) + f(3),又要单独计算f(3)的不同方式
+     *      那我们就可以打表来较少时间复杂度
      * &lt;p>
      * 时间复杂度：O（n）
      * 空间复杂度：O（n）
      *
-     * @param n 第n个泰波那契数列
-     * @return 第n个泰波那契数列值
+     * @param n 阶梯数量
+     * @return 不同方法
      */</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">tribonacci2</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">climbStairs2</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> n<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        dp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        dp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        dp<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
         <span class="token keyword">return</span> dp<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre>
+<h2 id="题解三："><a href="#题解三：" class="headerlink" title="题解三："></a>题解三：</h2><pre class=" language-java"><code class="language-java">    <span class="token comment" spellcheck="true">/**
+     * 思路：通过观察方法2的dp[i] = dp[i-1] + dp[i -2]
+     *      得知每次我们计算只需要前面两个数，因此我们可以
+     *      使用两个变量来替换申请的n个空间，降低空间复杂度
+     * &lt;p>
+     * 时间复杂度：O（n）
+     * 空间复杂度：O（1）
+     *
+     * @param n 阶梯数量
+     * @return 不同方法
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">climbStairs3</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">&lt;</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 从第三阶梯开始遍历，阶梯1距离阶梯3有两步，阶梯2距离阶梯3有一步</span>
+        <span class="token comment" spellcheck="true">// 到达阶梯1有1种方式，到达阶梯2有2种方式</span>
+        <span class="token keyword">int</span> stepTwo <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> stepOne <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> stepI <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 到达阶梯I的方式由到前一步阶梯与前两步阶梯之和</span>
+            stepI <span class="token operator">=</span> stepOne <span class="token operator">+</span> stepTwo<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 因为向后移动，距离当前阶梯1步的阶梯会变成距离2步了</span>
+            stepTwo <span class="token operator">=</span> stepOne<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 当前阶梯变成距离下一阶梯剩1阶梯</span>
+            stepOne <span class="token operator">=</span> stepI<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> stepOne <span class="token operator">+</span> stepTwo<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 </code></pre>
 
@@ -555,7 +604,7 @@ T_4 = 1 + 1 + 2 = 4
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://crossover-any.github.io/2022/02/12/LeetCode-1137-NthTaibonacciNumber/">https://crossover-any.github.io/2022/02/12/LeetCode-1137-NthTaibonacciNumber/</a>
+                    <a href="https://crossover-any.github.io/2022/02/13/LeetCode-70-ClimbingStairs/">https://crossover-any.github.io/2022/02/13/LeetCode-70-ClimbingStairs/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -764,9 +813,10 @@ T_4 = 1 + 1 + 2 = 4
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/02/13/LeetCode-70-ClimbingStairs/">
                     <div class="card-image">
@@ -784,9 +834,9 @@ T_4 = 1 + 1 + 2 = 4
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -795,6 +845,7 @@ T_4 = 1 + 1 + 2 = 4
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -813,13 +864,13 @@ T_4 = 1 + 1 + 2 = 4
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/10/LeetCode-509-FibonacciNumber/">
+                <a href="/2022/02/12/LeetCode-1137-NthTaibonacciNumber/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="LeetCode-509-FibonacciNumber">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="LeetCode-1137-NthTaibonacciNumber">
                         
-                        <span class="card-title">LeetCode-509-FibonacciNumber</span>
+                        <span class="card-title">LeetCode-1137-NthTaibonacciNumber</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -830,7 +881,7 @@ T_4 = 1 + 1 + 2 = 4
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-12
                             </span>
                         <span class="publish-author">
                             
